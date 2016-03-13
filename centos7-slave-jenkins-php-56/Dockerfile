@@ -1,0 +1,34 @@
+# The MIT License
+#
+#  Permission is hereby granted, free of charge, to any person obtaining a copy
+#  of this software and associated documentation files (the "Software"), to deal
+#  in the Software without restriction, including without limitation the rights
+#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#  copies of the Software, and to permit persons to whom the Software is
+#  furnished to do so, subject to the following conditions:
+#
+#  The above copyright notice and this permission notice shall be included in
+#  all copies or substantial portions of the Software.
+#
+#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+#  THE SOFTWARE.
+
+FROM radykal/centos7-slave-jenkins-php:latest
+MAINTAINER Marc Ruiz -radykal- <radykal@radykal.com>
+
+#CONFIGURE EPEL & REMI REPOSITORIES TO INSTALL PHP 5.6
+RUN yum install -y epel-release wget
+RUN wget http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+RUN rpm -Uvh remi-release-7.rpm
+RUN yum-config-manager  --enable remi-php56
+
+#INSTALL PACKAGES
+RUN yum update -y && yum install -y php php-xml
+
+#CONFIGURE PHP
+RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ UTC/g' /etc/php.ini
