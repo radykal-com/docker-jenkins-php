@@ -28,7 +28,7 @@ RUN rpm -Uvh remi-release-7.rpm
 RUN yum-config-manager  --enable remi-php55
 
 #INSTALL PACKAGES
-RUN yum update -y && yum install -y php php-xml php-pecl-xdebug
+RUN yum update -y && yum install -y php php-xml php-pecl-xdebug php-mbstring
 
 #REPLACE PHPUNIT WITH PHP5.5 COMPATIBLE VERSION
 RUN wget https://phar.phpunit.de/phpunit-old.phar \
