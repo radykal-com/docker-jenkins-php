@@ -28,7 +28,7 @@ RUN rpm -Uvh remi-release-7.rpm
 RUN yum-config-manager  --enable remi-php56
 
 #INSTALL PACKAGES
-RUN yum update -y && yum install -y php php-xml
+RUN yum update -y && yum install -y php php-xml php-pecl-xdebug php-mbstring
 
 #CONFIGURE PHP
 RUN sed -i 's/\;date\.timezone\ \=/date\.timezone\ \=\ UTC/g' /etc/php.ini
